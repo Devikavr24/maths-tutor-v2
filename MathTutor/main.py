@@ -54,7 +54,7 @@ class Bridge(QObject):
         self.difficultyIndex = 1
         self.questionType="addition"
         self.rowIndex = 0
-        self.fileurl = os.path.join(os.getcwd(),"MathTutor", "questions", "question.xlsx")
+        self.fileurl = os.path.join(os.getcwd(), "questions", "question.xlsx")
         self.df=""
 
         self.question="default"
