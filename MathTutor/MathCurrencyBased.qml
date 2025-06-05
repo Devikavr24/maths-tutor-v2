@@ -445,7 +445,7 @@ Item {
             console.log("File : " + file)
         }
         onAccepted: {
-            bridge.process_file(file)
+            bridge.process_file_screen(file)
             //parse
 
         }

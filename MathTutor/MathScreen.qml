@@ -6,6 +6,9 @@ import QtQuick.Controls.Material 2.1
 import QtMultimedia
 import io.qt.textproperties 1.0
 import QtTextToSpeech
+import QtQuick 2.15
+import QtQuick.Dialogs 
+import Qt.labs.platform 1.0
 Item {
     //this is a math subject screen with different lessons such as time,currency,story based, distance, help , operations
     //each subject has a buuton
@@ -161,6 +164,25 @@ Item {
                 }
             }
         }
+        FileDialog
+        {
+        id: fileDialog
+        title: "Select a file"
+        Component.onCompleted:{
+            
+            console.log("File : " + file)
+            }
+        onAccepted: 
+            {
+            bridge.process_file_screen(file)
+            //parse
+
+            }
+        onRejected:
+            {
+            console.log("File selection canceled")
+            }
+        }
         // an upload Button
 
         Button {
@@ -174,14 +196,17 @@ Item {
                 rightMargin: 10
             }
             onClicked: {
-                uploadWindow.visible = true
+                console.log("Upload button clicked")
+            fileDialog.open()
             }
             Keys.onReturnPressed:{
-                uploadWindow.visible = true
+                console.log("Upload button clicked")
+            fileDialog.open()
             }
 
             Keys.onEnterPressed: {
-                uploadWindow.visible = true
+                console.log("Upload button clicked")
+            fileDialog.open()
             }
         }
         ApplicationWindow {
@@ -368,10 +393,10 @@ Item {
             horizontalAlignment: Text.AlignHCenter
 
             anchors{
-                top: mathSubjectGrid.bottom
+                top: welcomeAnimation.bottom
                 horizontalCenter: parent.horizontalCenter
                 verticalCenter: parent.verticalCenter
-                topMargin: 30
+                topMargin: 200
             }
 
         }
