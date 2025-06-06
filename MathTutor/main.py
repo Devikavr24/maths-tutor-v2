@@ -266,7 +266,25 @@ class Bridge(QObject):
         print("DataFrame after filtering and sorting:")
         print(self.df)
         
+    @Slot(str)
+    def process_file_screen(self, file_url):
+        # Convert the file URL to a local file path if necessary
+        print(f"file_url: {file_url}")
+        local_file_path = file_url.replace("file:///", "")
+        print(f"Processing file: {local_file_path}")
 
+        # Read the Excel file
+        self.df = pd.read_excel(local_file_path) # Read the Excel file
+        self.df = pd.DataFrame(self.df)         # Convert the Excel file to a DataFrame
+        
+        # Filter the DataFrame by the question type and difficulty
+        self.df = self.df[ (self.df["difficulty"] == self.difficultyIndex)] # Filter the DataFrame by the question type
+        self.df = self.df.sort_values(by="difficulty", ascending=True)  # Sort the DataFrame by difficulty
+
+        self.current_question_index = 0
+
+        print("DataFrame after  sorting:")
+        print(self.df)
     @Slot()
     def sequence(self):
         self.oprands=[]
